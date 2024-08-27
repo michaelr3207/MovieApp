@@ -1,5 +1,31 @@
 
 
-* {
-    background: dodgerblue;
+body, html {
+    background: linear-gradient(237deg, #0b0a0c, rgb(47, 55, 59));
+    margin: 0;
+    height: 100%;
+}
+
+.container {
+    border: 2px solid red;
+    margin: auto;
+    margin-top: 5%;
+    width: 45%;
+    height: 82%;
+    display: grid;
+    grid-template-rows: 0.8fr 2fr 1fr;
+}
+
+.searchBar {
+    border: 1px solid green;
+    grid-row: 1 / 1;
+}
+
+.movieDisplay {
+    grid-row: 2 / 2 ;
+    border: 1px solid orange;
+}
+
+.movieDescriptionAndCast {
+
 }
