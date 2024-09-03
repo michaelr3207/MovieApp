@@ -26,3 +26,4 @@ class Movie {
     }
 
 }
+export  {Movie};

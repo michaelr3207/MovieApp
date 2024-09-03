@@ -9,6 +9,10 @@ class UIDisplay {
     getName() {
         return this.name;
     }
+
+    updateMovieDetailsOnUi(movieTitle) {
+        document.getElementById('movieTitleDiv').innerHTML = movieTitle;
+    }
 }
 
 export {UIDisplay};
