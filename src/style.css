@@ -14,6 +14,7 @@ body, html {
     height: 82%;
     display: grid;
     grid-template-rows: 0.8fr 1.6fr 1fr;
+    background-color: rgba(0, 0, 0, 0.27);
 }
 
 .searchBar {
@@ -211,13 +212,18 @@ body, html {
 #searchButton {
     border: 1px solid grey;
     border-radius: 5%;
-    background-color: #bea802;
+    background-color: #948400;
     margin-top: 2%;
     width: 90%;
     height: 88%;
-    margin-left: 2%;
+    margin-left: 7%;
     color: #000000;
     font-size: 27px;
+}
+
+#searchButton:hover {
+    background-color: #cbb70c;
+
 }
 
 #searchInput {
