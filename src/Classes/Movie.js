@@ -2,18 +2,28 @@
 
 class Movie {
 
-    constructor(name, rating, cast, genre) {
+    constructor(name, rating, cast, genre, posterSource, moviePlot) {
         this.name = name;
         this.rating = rating;
         this.cast = cast;
         this.genre = genre;
+        this.moviePoster = new Image();
+        this.moviePoster.src = posterSource;
+        this.moviePlot = moviePlot;
     }
 
-    getName() {
+    getMoviePlot() {
+        return this.moviePlot;
+    }
+
+    getMovieCast() {
+        return this.cast;
+    }
+    getMovieName() {
         return this.name;
     }
 
-    getRating() {
+    getMovieRating() {
         return this.rating;
     }
 
@@ -23,6 +33,10 @@ class Movie {
 
     getGenre() {
         return this.genre;
+    }
+
+    getMoviePoster() {
+        return this.moviePoster;
     }
 
 }

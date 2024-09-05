@@ -7,7 +7,7 @@ body, html {
 }
 
 .container {
-    border: 2px solid red;
+    border: 2px solid #6b6b6b;
     margin: auto;
     margin-top: 5%;
     width: 45%;
@@ -18,25 +18,25 @@ body, html {
 }
 
 .searchBar {
-    border: 1px solid green;
+    /*border: 1px solid green;*/
     grid-row: 1 / 1;
 }
 
 .movieDisplay {
     grid-row: 2 / 2 ;
-    border: 1px solid orange;
+    /*border: 1px solid #565251;*/
     display: flex;
     flex-direction: row;
 }
 
 .movieImage {
-    border: 1px solid palevioletred;
+    border: 1px solid #565251;
     height: 100%;
     width: 30%;
 }
 
 .movieDetailsContainer {
-    border: 2px solid purple;
+    border: 1px solid #565251;
     height: 100%;
     width: 70%;
     display: flex;
@@ -58,7 +58,7 @@ body, html {
 }
 
 .movieTitle {
-    border: 2px solid green;
+    /*border: 2px solid green;*/
     text-align: center;
     width: 100%;
     height: 10%;
@@ -68,32 +68,43 @@ body, html {
 }
 
 .movieRating {
-    border: 2px solid pink;
+    /*border: 2px solid pink;*/
     width: 100%;
     height: 15%;
     display: flex;
     flex-direction: row;
+    margin-top: 4.5%;
 }
 
 .ratingAndImage {
-    border: 2px solid red;
+    /*border: 2px solid red;*/
     margin: auto;
     display: flex;
     flex-direction: row;
-    width: 20%;
-    height: 80%;;
+    width: 30%;
+    height: 100%;;
 }
 
 #starImage {
-    height: auto;
-    width: 50%;
-    border: 1px solid green;
+    height: 100%;
+    width: 30%;
+    /*border: 1px solid green;*/
+}
+
+#starImage img {
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0);
 }
 
 #rating {
-    border: 1px solid orange;
+    /*border: 1px solid orange;*/
     height: auto;
-    width: 50%;
+    width: 70%;
+    color: #c4c4c4;
+    font-size: 400%;
+    font-family: monospace;
+    text-align: center;
 }
 
 
@@ -114,10 +125,15 @@ body, html {
 }
 
 #imageContainer {
-    border: 2px solid gold;
+    border: 2px solid #0e0c01;
     margin: 7.5% auto auto;
     width: 90%;
     height: 90%;
+}
+
+#imageContainer img {
+    width: 100%;
+    height: 100%;
 }
 
 .movieGenres {
@@ -139,7 +155,7 @@ body, html {
 
 .plotAndCastContainer {
     margin: auto;
-    border: 1px solid mediumaquamarine;
+    border: 1px solid #888888;
     width: 93%;
     height: 89%;
     display: flex;
@@ -148,7 +164,7 @@ body, html {
 }
 
 .plotContainer {
-    border: 1px solid crimson;
+    /*border: 1px solid crimson;*/
     width: 100%;
     height: 50%;
     display: flex;
@@ -156,7 +172,7 @@ body, html {
 }
 
 .castContainer {
-    border: 1px solid #ff76fc;
+    /*border: 1px solid #ff76fc;*/
     width: 100%;
     height: 50%;
     display: flex;
@@ -166,7 +182,7 @@ body, html {
 #plotTitle {
     width: 100%;
     height: 20%;
-    border: 1px solid yellow;
+    border-top: 1px solid #7a7a7a;
     color: #e5e5e5;
     font-size: 30px;
 }
@@ -174,7 +190,7 @@ body, html {
 #castTitle {
     width: 100%;
     height: 20%;
-    border: 1px solid #219ac5;
+    border-top: 1px solid #7a7a7a;
     color: #e5e5e5;
     font-size: 30px;
 }
@@ -244,3 +260,4 @@ body, html {
     /*border: 2px solid purple;*/
     margin: auto;
 }
+
