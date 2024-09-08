@@ -48,7 +48,7 @@ body, html {
 }
 
 .movieDetails {
-    border: 2px solid yellow;
+    border: 2px solid #676758;
     margin: auto;
     margin-top: 7.5%;
     width: 90%;
@@ -110,7 +110,7 @@ body, html {
 
 .movieFigures {
     margin: 6% auto 0;
-    border: 2px solid turquoise;
+    /*border: 2px solid turquoise;*/
     width: 75%;
     height: 15%;
     display: flex;
@@ -119,7 +119,7 @@ body, html {
 }
 
 .movieFigureContainer {
-    border: 2px solid darkorange;
+    border: 1px solid #b9b9b9;
     height: 80%;
     width: 27%;
 }
@@ -138,7 +138,7 @@ body, html {
 
 .movieGenres {
     margin-top: 5%;
-    border: 2px solid #de22c3;
+    /*border: 2px solid #de22c3;*/
     width: 100%;
     height: 15%;
     display: flex;
@@ -151,6 +151,11 @@ body, html {
     border-radius: 5%;
     height: 80%;
     width: 27%;
+    color: #b9b9b9;
+    text-align: center;
+    padding-top: 2%;
+    font-family: monospace;
+    font-size: 2em;
 }
 
 .plotAndCastContainer {
@@ -261,3 +266,11 @@ body, html {
     margin: auto;
 }
 
+
+#ageRating, #movieLength, #releaseDate {
+    color: whitesmoke;
+    font-family: monospace;
+    font-size: 2em;
+    text-align: center;
+    padding-top: 2%;
+}

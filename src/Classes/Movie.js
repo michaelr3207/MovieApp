@@ -2,14 +2,30 @@
 
 class Movie {
 
-    constructor(name, rating, cast, genre, posterSource, moviePlot) {
+    constructor(name, rating, cast, movieGenres, posterSource, moviePlot, ageRating, movieLength, releaseDate) {
         this.name = name;
         this.rating = rating;
         this.cast = cast;
-        this.genre = genre;
+        this.genres = movieGenres.split(',');
         this.moviePoster = new Image();
         this.moviePoster.src = posterSource;
         this.moviePlot = moviePlot;
+        this.ageRating = ageRating;
+        this.movieLength = movieLength;
+        this.releaseDate = releaseDate;
+    }
+
+
+    getReleaseDate() {
+        return this.releaseDate;
+    }
+
+    getMovieLength() {
+        return this.movieLength;
+    }
+
+    getAgeRating() {
+        return this.ageRating;
     }
 
     getMoviePlot() {
@@ -31,8 +47,8 @@ class Movie {
         return this.cast;
     }
 
-    getGenre() {
-        return this.genre;
+    getGenres() {
+        return this.genres;
     }
 
     getMoviePoster() {

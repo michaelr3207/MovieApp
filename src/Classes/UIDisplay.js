@@ -20,7 +20,22 @@ class UIDisplay {
         document.getElementById('castDescription').innerHTML = currentMovie.getMovieCast();
         document.getElementById('plotDescription').innerHTML = currentMovie.getMoviePlot();
         document.getElementById('imageContainer').innerHTML = '';
+        document.getElementById('ageRating').innerHTML = currentMovie.getAgeRating();
+        document.getElementById('releaseDate').innerHTML = currentMovie.getReleaseDate();
+        document.getElementById('movieLength').innerHTML = currentMovie.getMovieLength();
         document.getElementById('imageContainer').append(currentMovie.getMoviePoster());
+        this,this.buildGenreComponentsAndAddToUI(currentMovie);
+    }
+
+    buildGenreComponentsAndAddToUI(currentMovie) {
+        const movieGenreDiv = document.getElementById('movieGenreContainer');
+        movieGenreDiv.innerHTML = ''
+        for(let index = 0; index < currentMovie.getGenres().length; index ++) {
+            const movieGenreElement = document.createElement('div')
+            movieGenreElement.className = 'movieGenreContainer';
+            movieGenreElement.innerHTML = currentMovie.getGenres().at(index);
+            movieGenreDiv.append(movieGenreElement);
+        }
     }
 
 }
