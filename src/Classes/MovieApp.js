@@ -8,11 +8,20 @@ class MovieApp {
     constructor(name) {
         this.name = name;
         this.API_LINK = 'https://www.omdbapi.com/?apikey=60f5adbf&t=';
+        this.SECOND_API_LINK = 'https://api.themoviedb.org/3/search/movie?api_key=ed48037faa2f5e8e12ca9c7f0cc79238&query=I+Am+Legend';
+        this.POPULAR_MOVIES_API_LINK = 'https://api.themoviedb.org/3/movie/popular?api_key=ed48037faa2f5e8e12ca9c7f0cc79238';
         this.UiDisplay = new UIDisplay('Movie App Display');
         this.movieToBeSearched = 'Riders of Justice';
         this.enteredUrl = this.getApiLink()+ translateMovieTitleToBeSearched(this.movieToBeSearched);
         this.currentSelectedMovie = null;
         this.getMovieDataAndUpdateUi().then(r => console.log('Fetching Data complete'));
+        this.getPopularMovies().then(r => console.log('Successfully fetched popular movies.'));
+    }
+
+    async getPopularMovies() {
+        const response = await fetch(this.POPULAR_MOVIES_API_LINK, {mode: "cors"});
+        const fetchedPopularMovies = await response.json();
+        console.log(fetchedPopularMovies);
     }
 
     async getMovieDataAndUpdateUi() {
