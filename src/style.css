@@ -277,3 +277,84 @@ body, html {
     text-align: center;
     padding-top: 2%;
 }
+
+.hide {
+    display: none;
+}
+
+.popularAndTopRatedContainer {
+    border: 2px solid #595959;
+    border-radius: 10%;
+    margin: auto;
+    margin-top: 2.5%;
+    width: 75%;
+    height: 95%;
+    display: grid;
+    grid-template-rows: 0.26fr 2fr;
+    background: rgba(3, 0, 31, 0.78);
+    background: -moz-linear-gradient(-45deg, rgba(3, 0, 31, 0.78) 0%, #280000 50%, rgba(3, 0, 31, 0.78) 100%);
+    background: -webkit-linear-gradient(-45deg, rgba(3, 0, 31, 0.78) 0%, #460303 50%, rgba(3, 0, 31, 0.78) 100%);
+    background: linear-gradient(135deg, rgba(3, 0, 31, 0.78) 0%, #260101 50%, rgba(3, 0, 31, 0.78) 100%);
+}
+
+.conatiner2Header {
+    display: flex;
+    flex-direction: column;
+}
+
+.container2Title {
+    border-bottom: 1px solid black;
+    margin: auto;
+    text-align: center;
+    text-decoration: underline;
+    font-family: monospace;
+    font-size: 3em;
+    width: 30%;
+    height: 100%;
+    color: white;
+}
+
+.moviesDisplayed {
+    margin: auto;
+    border: 1px solid #000000;
+    border-radius: 10%;
+    width: 90%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 0.8fr 0.8fr 0.8fr 0.8fr;
+    gap: 10px;
+    /*padding-top: 10%;*/
+}
+
+.displayedMovie {
+    /*margin: auto;*/
+    width: 250px;
+    height: 330px;
+    border: 1px solid #000000;
+    background: white;
+}
+
+.displayedMovie img {
+    width: 100%;
+    height: 100%;
+}
+
+
+#closeBtn {
+    color: white;
+    background: red;
+    border: 1px solid black;
+    border-radius: 10%;
+}
+
+.logo {
+    /*border: 1px solid gold;*/
+    width: 20%;
+    height: 10%;
+    margin-left: 5%;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+}

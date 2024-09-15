@@ -1,9 +1,12 @@
 import './style.css'
 import {MovieApp} from "./Classes/MovieApp";
+import {translateMovieTitleToBeSearched} from "./Util";
+
+const movieApp = new MovieApp('Simple Movie App');
 
 function main() {
-     const movieApp = new MovieApp('Simple Movie App');
      addEventListenerToSearchButton(movieApp);
+     addEventListenToCloseButton();
 }
 
 function addEventListenerToSearchButton(movieApp) {
@@ -19,4 +22,23 @@ function addEventListenerToSearchButton(movieApp) {
      });
 }
 
+function addEventListenerToDisplayedMovie(displayedMovie) {
+    displayedMovie.addEventListener("click", (mouseEvent) => {
+        console.log(`ehfnhehefhef: ${displayedMovie.id}`)
+        movieApp.setMovieToBeSearched(displayedMovie.id);
+        movieApp.setEnteredUrl();
+        movieApp.getMovieDataAndUpdateUi().then(r => console.log('Fetching complete! You clicked: ' + mouseEvent.target.id));
+        movieApp.UiDisplay.hideMainScreenAndShowMovieInfoScreen();
+    });
+}
+
+function addEventListenToCloseButton() {
+    const closeBtn = document.getElementById('closeBtn');
+    closeBtn.addEventListener("click", () => {
+       movieApp.UiDisplay.hideInfoScreenAndShowMainScreen();
+    });
+}
+
 main();
+
+export {addEventListenerToDisplayedMovie};

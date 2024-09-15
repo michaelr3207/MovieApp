@@ -1,3 +1,4 @@
+// "This [website, program, service, application, product] uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB
 
 
 class Movie {

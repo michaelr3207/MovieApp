@@ -19,9 +19,23 @@ class MovieApp {
     }
 
     async getPopularMovies() {
+        const displayedMovieDiv = document.getElementById('displayedMoviesDiv');
+        displayedMovieDiv.innerHTML = '';
         const response = await fetch(this.POPULAR_MOVIES_API_LINK, {mode: "cors"});
         const fetchedPopularMovies = await response.json();
         console.log(fetchedPopularMovies);
+        let counter = 0;
+        fetchedPopularMovies.results.forEach((currentPopularMovie) => {
+            if (counter === 12) {
+                return;
+            }
+            console.log(currentPopularMovie.original_title);
+            counter ++;
+            const posterPath = currentPopularMovie.poster_path;
+            const baseUrl = "https://image.tmdb.org/t/p/w500"; // You can change 'w500' to other sizes as needed
+            const fullPosterUrl = `${baseUrl}${posterPath}`;
+            displayedMovieDiv.appendChild(this.UiDisplay.buildDisplayedMovieComponent(currentPopularMovie.original_title, fullPosterUrl));
+        });
     }
 
     async getMovieDataAndUpdateUi() {
