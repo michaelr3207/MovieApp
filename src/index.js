@@ -6,7 +6,7 @@ const movieApp = new MovieApp('Simple Movie App');
 
 function main() {
      addEventListenerToSearchButton(movieApp);
-     addEventListenToCloseButton();
+     addEventListenToCloseButtonAndIcon();
 }
 
 function addEventListenerToSearchButton(movieApp) {
@@ -23,8 +23,7 @@ function addEventListenerToSearchButton(movieApp) {
 }
 
 function addEventListenerToDisplayedMovie(displayedMovie) {
-    displayedMovie.addEventListener("click", (mouseEvent) => {
-        console.log(`ehfnhehefhef: ${displayedMovie.id}`)
+    displayedMovie.addEventListener("click", () => {
         movieApp.setMovieToBeSearched(displayedMovie.id);
         movieApp.setEnteredUrl();
         movieApp.getMovieDataAndUpdateUi().then(r => console.log('Fetching complete! You clicked: ' + mouseEvent.target.id));
@@ -32,11 +31,15 @@ function addEventListenerToDisplayedMovie(displayedMovie) {
     });
 }
 
-function addEventListenToCloseButton() {
+function addEventListenToCloseButtonAndIcon() {
     const closeBtn = document.getElementById('closeBtn');
     closeBtn.addEventListener("click", () => {
        movieApp.UiDisplay.hideInfoScreenAndShowMainScreen();
     });
+    document.getElementById('logoDiv').addEventListener('click', function() {
+        window.location.href = 'https://www.themoviedb.org/?language=en-GB';
+    });
+
 }
 
 main();

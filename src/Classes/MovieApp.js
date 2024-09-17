@@ -3,13 +3,16 @@ import {translateMovieTitleToBeSearched} from "../Util";
 import {Movie} from "./Movie";
 
 
+require('dotenv').config();
+
 class MovieApp {
+
+
 
     constructor(name) {
         this.name = name;
-        this.API_LINK = 'https://www.omdbapi.com/?apikey=60f5adbf&t=';
-        this.SECOND_API_LINK = 'https://api.themoviedb.org/3/search/movie?api_key=ed48037faa2f5e8e12ca9c7f0cc79238&query=I+Am+Legend';
-        this.POPULAR_MOVIES_API_LINK = 'https://api.themoviedb.org/3/movie/popular?api_key=ed48037faa2f5e8e12ca9c7f0cc79238';
+        this.API_LINK = process.env.OMDB_API_KEY;
+        this.POPULAR_MOVIES_API_LINK = process.env.TMDB_API_KEY;
         this.UiDisplay = new UIDisplay('Movie App Display');
         this.movieToBeSearched = 'Riders of Justice';
         this.enteredUrl = this.getApiLink()+ translateMovieTitleToBeSearched(this.movieToBeSearched);
