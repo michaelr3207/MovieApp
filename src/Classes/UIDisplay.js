@@ -44,6 +44,10 @@ class UIDisplay {
         }
     }
 
+    setDisplayedMoviesHeaderTitle(currentSelectedGenre) {
+        document.getElementById('container2TitleDiv').innerHTML = currentSelectedGenre;
+    }
+
     buildDisplayedMovieComponent(movieTitle, moviePoster) {
         const displayedMovieDiv = document.createElement('div');
         displayedMovieDiv.className = 'displayedMovie';

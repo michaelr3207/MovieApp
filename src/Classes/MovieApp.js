@@ -1,7 +1,6 @@
 import {UIDisplay} from "./UIDisplay";
-import {translateMovieTitleToBeSearched} from "../Util";
+import {translateMovieTitleToBeSearched, TRENDING_OPTION} from "../Util";
 import {Movie} from "./Movie";
-
 
 require('dotenv').config();
 
@@ -10,29 +9,38 @@ class MovieApp {
     constructor(name) {
         this.name = name;
         this.API_LINK = process.env.OMDB_API_KEY;
-        this.POPULAR_MOVIES_API_LINK = process.env.TMDB_API_KEY;
-        this.TRENDING_MOVIES_API_LINK = process.env.TMDB_API_KEY_TRENDING;
+        this.POPULAR_MOVIES_API_LINK = process.env.TMDB_POPULAR_KEY;
+        this.TRENDING_MOVIES_API_LINK = process.env.TMDB_TRENDING_KEY;
         this.UiDisplay = new UIDisplay('Movie App Display');
         this.movieToBeSearched = 'Riders of Justice';
-        this.enteredUrl = this.getApiLink()+ translateMovieTitleToBeSearched(this.movieToBeSearched);
+        this.enteredUrl = this.getApiLink() + translateMovieTitleToBeSearched(this.movieToBeSearched);
         this.currentSelectedMovie = null;
         this.getMovieDataAndUpdateUi().then(r => console.log('Fetching Data complete'));
-        this.getTrendingMovies().then(r => console.log('Successfully fetched popular movies.'));
+        this.getPopularMovies().then(r => console.log('Successfully fetched popular movies.'));
+        this.currentSetSearchSetting = null
+    }
+
+    getCurrentSetSearchSetting() {
+        return this.currentSetSearchSetting;
+    }
+
+    setCurrentSetSearchSetting(option) {
+        this.currentSetSearchSetting = option;
     }
 
 
     async getTrendingMovies() {
+        this.setCurrentSetSearchSetting(TRENDING_OPTION);
+        this.UiDisplay.setDisplayedMoviesHeaderTitle(this.getCurrentSetSearchSetting());
         const displayedMovieDiv = document.getElementById('displayedMoviesDiv');
         displayedMovieDiv.innerHTML = '';
         const response = await fetch(this.TRENDING_MOVIES_API_LINK, {mode: "cors"});
         const fetchedPopularMovies = await response.json();
-        console.log(fetchedPopularMovies);
         let counter = 0;
         fetchedPopularMovies.results.forEach((currentTrendingMovie) => {
             if (counter === 12) {
                 return;
             }
-            console.log(currentTrendingMovie.original_title);
             counter ++;
             const posterPath = currentTrendingMovie.poster_path;
             const baseUrl = "https://image.tmdb.org/t/p/w500"; // You can change 'w500' to other sizes as needed
@@ -43,17 +51,17 @@ class MovieApp {
 
 
     async getPopularMovies() {
+        this.setCurrentSetSearchSetting(TRENDING_OPTION);
+        this.UiDisplay.setDisplayedMoviesHeaderTitle(this.getCurrentSetSearchSetting())
         const displayedMovieDiv = document.getElementById('displayedMoviesDiv');
         displayedMovieDiv.innerHTML = '';
         const response = await fetch(this.POPULAR_MOVIES_API_LINK, {mode: "cors"});
         const fetchedPopularMovies = await response.json();
-        console.log(fetchedPopularMovies);
         let counter = 0;
         fetchedPopularMovies.results.forEach((currentPopularMovie) => {
             if (counter === 12) {
                 return;
             }
-            console.log(currentPopularMovie.original_title);
             counter ++;
             const posterPath = currentPopularMovie.poster_path;
             const baseUrl = "https://image.tmdb.org/t/p/w500"; // You can change 'w500' to other sizes as needed
@@ -65,8 +73,6 @@ class MovieApp {
     async getMovieDataAndUpdateUi() {
         const response = await fetch(this.enteredUrl, {mode: "cors"});
         const fetchedMovieData = await response.json();
-        console.log(fetchedMovieData);
-        console.log('Fetched Movie Results Below: \n\nMovie Title: ' + fetchedMovieData.Title  + '\nAge Rating: ' + fetchedMovieData.Rated )
         this.setCurrentSelectedMovie(new Movie(fetchedMovieData.Title,fetchedMovieData.imdbRating, fetchedMovieData.Actors, fetchedMovieData.Genre, fetchedMovieData.Poster, fetchedMovieData.Plot, fetchedMovieData.Rated, fetchedMovieData.Runtime, fetchedMovieData.Released.slice(-4), fetchedMovieData));
         this.UiDisplay.updateMovieDetailsOnUi(this.getCurrentSelectedMovie());
     }
