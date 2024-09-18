@@ -8,18 +8,39 @@ require('dotenv').config();
 class MovieApp {
 
     constructor(name) {
-        console.log('pop movies' + process.env.TMDB_API_KEY
-        );
         this.name = name;
         this.API_LINK = process.env.OMDB_API_KEY;
         this.POPULAR_MOVIES_API_LINK = process.env.TMDB_API_KEY;
+        this.TRENDING_MOVIES_API_LINK = process.env.TMDB_API_KEY_TRENDING;
         this.UiDisplay = new UIDisplay('Movie App Display');
         this.movieToBeSearched = 'Riders of Justice';
         this.enteredUrl = this.getApiLink()+ translateMovieTitleToBeSearched(this.movieToBeSearched);
         this.currentSelectedMovie = null;
         this.getMovieDataAndUpdateUi().then(r => console.log('Fetching Data complete'));
-        this.getPopularMovies().then(r => console.log('Successfully fetched popular movies.'));
+        this.getTrendingMovies().then(r => console.log('Successfully fetched popular movies.'));
     }
+
+
+    async getTrendingMovies() {
+        const displayedMovieDiv = document.getElementById('displayedMoviesDiv');
+        displayedMovieDiv.innerHTML = '';
+        const response = await fetch(this.TRENDING_MOVIES_API_LINK, {mode: "cors"});
+        const fetchedPopularMovies = await response.json();
+        console.log(fetchedPopularMovies);
+        let counter = 0;
+        fetchedPopularMovies.results.forEach((currentTrendingMovie) => {
+            if (counter === 12) {
+                return;
+            }
+            console.log(currentTrendingMovie.original_title);
+            counter ++;
+            const posterPath = currentTrendingMovie.poster_path;
+            const baseUrl = "https://image.tmdb.org/t/p/w500"; // You can change 'w500' to other sizes as needed
+            const fullPosterUrl = `${baseUrl}${posterPath}`;
+            displayedMovieDiv.appendChild(this.UiDisplay.buildDisplayedMovieComponent(currentTrendingMovie.original_title, fullPosterUrl));
+        });
+    }
+
 
     async getPopularMovies() {
         const displayedMovieDiv = document.getElementById('displayedMoviesDiv');
