@@ -4,8 +4,29 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const toml = require('toml');
 const yaml = require('yamljs');
 const json5 = require('json5');
+const dotenv = require('dotenv').config({ path: './.env' });
 
 module.exports = {
+    mode: 'development',
+    resolve: {
+        fallback: {
+            "stream": require.resolve("stream-browserify"),
+            "buffer": require.resolve("buffer/"),
+            "path": require.resolve("path-browserify"),
+            "os": require.resolve("os-browserify/browser"),
+            "crypto": require.resolve("crypto-browserify"),
+            "process": require.resolve("process/browser"),
+        }
+    },
+    plugins: [
+        new webpack.ProvidePlugin({
+            Buffer: ['buffer', 'Buffer'],
+            process: 'process/browser',
+        }),
+        new webpack.DefinePlugin({
+            'process.env': JSON.stringify(dotenv.parsed)  // Embed environment variables
+        }),
+    ],
     entry: './src/index.js',
     output: {
         filename: 'main.js',

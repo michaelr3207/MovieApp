@@ -7,9 +7,9 @@ require('dotenv').config();
 
 class MovieApp {
 
-
-
     constructor(name) {
+        console.log('pop movies' + process.env.TMDB_API_KEY
+        );
         this.name = name;
         this.API_LINK = process.env.OMDB_API_KEY;
         this.POPULAR_MOVIES_API_LINK = process.env.TMDB_API_KEY;
