@@ -1,5 +1,5 @@
 import {UIDisplay} from "./UIDisplay";
-import {MAX_PAGE_VALUE, translateMovieTitleToBeSearched, TRENDING_OPTION} from "../Util";
+import {MAX_PAGE_VALUE, POPULAR_OPTION, translateMovieTitleToBeSearched, TRENDING_OPTION} from "../Util";
 import {Movie} from "./Movie";
 
 require('dotenv').config();
@@ -15,10 +15,10 @@ class MovieApp {
         this.movieToBeSearched = 'Riders of Justice';
         this.enteredUrl = this.getApiLink() + translateMovieTitleToBeSearched(this.movieToBeSearched);
         this.currentSelectedMovie = null;
-        this.getMovieDataAndUpdateUi().then(r => console.log('Fetching Data complete'));
-        this.getPopularMovies().then(r => console.log('Successfully fetched popular movies.'));
         this.currentSetSearchSetting = null
         this.numberOfDisplayedMovies = null;
+        this.getMovieDataAndUpdateUi().then(r => console.log('Fetching Data complete'));
+        this.getPopularMovies().then(r => console.log('Successfully fetched popular movies.'));
     }
 
     getCurrentSetSearchSetting() {
@@ -63,7 +63,7 @@ class MovieApp {
     async getPopularMovies() {
         let counter = 0;
         this.setNumberOfDisplayedMovies(counter);
-        this.setCurrentSetSearchSetting(TRENDING_OPTION);
+        this.setCurrentSetSearchSetting(POPULAR_OPTION);
         this.UiDisplay.setDisplayedMoviesHeaderTitle(this.getCurrentSetSearchSetting())
         const displayedMovieDiv = document.getElementById('displayedMoviesDiv');
         displayedMovieDiv.innerHTML = '';

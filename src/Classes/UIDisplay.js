@@ -70,11 +70,13 @@ class UIDisplay {
     }
 
     hideMainScreenAndShowMovieInfoScreen() {
+        document.getElementById('body').style.height = '100%';
         document.getElementById('topRatedPopularDiv').className = 'hide';
         document.getElementById('movieInfoDiv').className = 'container';
     }
 
     hideInfoScreenAndShowMainScreen() {
+        document.getElementById('body').style.height = 'auto';
         document.getElementById('topRatedPopularDiv').className = 'popularAndTopRatedContainer';
         document.getElementById('movieInfoDiv').className = 'hide';
     }
