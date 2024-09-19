@@ -60,6 +60,15 @@ class UIDisplay {
         return displayedMovieDiv;
     }
 
+    unlockScrollBar() {
+        document.getElementById('body').style.height = 'auto';
+        document.getElementById('displayedMoviesDiv').style.height = 'auto';
+    }
+
+    checkIfThereAreMoreThanTwelveMovies() {
+
+    }
+
     hideMainScreenAndShowMovieInfoScreen() {
         document.getElementById('topRatedPopularDiv').className = 'hide';
         document.getElementById('movieInfoDiv').className = 'container';

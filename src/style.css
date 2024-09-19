@@ -29,6 +29,7 @@ body, html {
     flex-direction: row;
 }
 
+
 .movieImage {
     border: 1px solid #565251;
     height: 100%;
@@ -291,10 +292,10 @@ body, html {
     height: 99%;
     display: grid;
     grid-template-rows: 0.56fr 2.5fr;
-    background: rgba(3, 0, 31, 0.78);
-    background: -moz-linear-gradient(-45deg, rgba(3, 0, 31, 0.78) 0%, #586eee 50%, rgba(3, 0, 31, 0.78) 100%);
-    background: -webkit-linear-gradient(-45deg, rgba(3, 0, 31, 0.78) 0%, #042281 50%, rgba(3, 0, 31, 0.78) 100%);
-    background: linear-gradient(135deg, rgba(3, 0, 31, 0.78) 0%, #0c1173 50%, rgba(3, 0, 31, 0.78) 100%);
+    background: rgba(98, 3, 3, 0.78);
+    background: -moz-linear-gradient(-45deg, rgba(112, 35, 12, 0.78) 0%, #a2503e 50%, rgba(68, 14, 3, 0.78) 100%);
+    background: -webkit-linear-gradient(-45deg, rgba(31, 1, 0, 0.78) 0%, #e04944 50%, rgba(31, 5, 0, 0.78) 100%);
+    background: linear-gradient(135deg, rgba(68, 9, 7, 0.78) 0%, #340c0c 50%, rgba(56, 16, 4, 0.78) 100%);
 }
 
 .container2Header {
@@ -311,8 +312,10 @@ body, html {
     font-family: Verdana;
     font-size: 2.5em;
     width: 30%;
-    height: 50%;
+    height: 40%;
     color: white;
+    margin-top: 1.5%;
+    /*padding-top: 2%;*/
 }
 
 .moviesDisplayed {
@@ -329,13 +332,15 @@ body, html {
 .displayedMovie {
     /*margin: auto;*/
     width: 92%;
-    height: 92%;
     border: 1px solid #000000;
     background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* Ensure it stretches */
 }
 
 .displayedMovie:hover {
-    border: 1.5px solid white;
+    border: 3px solid white;
 }
 
 .displayedMovie img {
@@ -384,4 +389,62 @@ body, html {
     font-weight: bolder;
     text-decoration: underline;
 
+}
+
+
+.searchBarHeader {
+    width: 35%;
+    height: 75%;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    /*border: 1px solid fuchsia;*/
+}
+
+.searchBarHeader input {
+    width: 90%;
+    height: 100%;
+    background-color: rgba(162, 62, 62, 0);
+    border: 2px solid rgb(246, 246, 246);
+    border-radius: 20px;
+    padding-left: 1%;
+    font-size: 100%;
+    font-family: Verdana;
+}
+
+.filterButtonContainer {
+    /*border: 2px solid chartreuse;*/
+    width: 20%;
+    height: 75%;
+    display: flex;
+    flex-direction: row;
+    margin-left: 4%;
+}
+
+.filterButtonContainer button {
+    width: 80%;
+    height: 100%;
+    border: 1px solid white;
+    border-radius: 20px;
+    background-color: rgba(65, 1, 1, 0);
+    color: white;
+    font-family: Verdana;
+    font-size: 100%;
+}
+
+.filterButtonContainer button:hover {
+   border: 3px solid white;
+    background-color: rgba(255, 255, 255, 0.34);
+}
+
+
+
+.filterAndSearchbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 30%;
+    width: 100%;
+    /*border: 2px solid beige;*/
+    margin: auto;
 }

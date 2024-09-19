@@ -1,5 +1,5 @@
 import {UIDisplay} from "./UIDisplay";
-import {translateMovieTitleToBeSearched, TRENDING_OPTION} from "../Util";
+import {MAX_PAGE_VALUE, translateMovieTitleToBeSearched, TRENDING_OPTION} from "../Util";
 import {Movie} from "./Movie";
 
 require('dotenv').config();
@@ -18,6 +18,7 @@ class MovieApp {
         this.getMovieDataAndUpdateUi().then(r => console.log('Fetching Data complete'));
         this.getPopularMovies().then(r => console.log('Successfully fetched popular movies.'));
         this.currentSetSearchSetting = null
+        this.numberOfDisplayedMovies = null;
     }
 
     getCurrentSetSearchSetting() {
@@ -28,20 +29,29 @@ class MovieApp {
         this.currentSetSearchSetting = option;
     }
 
+    setNumberOfDisplayedMovies(number) {
+        this.numberOfDisplayedMovies = number;
+    }
+
+    getNumberOfDisplayedMovies() {
+        return this.numberOfDisplayedMovies;
+    }
 
     async getTrendingMovies() {
+        let counter = 0;
+        this.setNumberOfDisplayedMovies(counter);
         this.setCurrentSetSearchSetting(TRENDING_OPTION);
         this.UiDisplay.setDisplayedMoviesHeaderTitle(this.getCurrentSetSearchSetting());
         const displayedMovieDiv = document.getElementById('displayedMoviesDiv');
         displayedMovieDiv.innerHTML = '';
         const response = await fetch(this.TRENDING_MOVIES_API_LINK, {mode: "cors"});
         const fetchedPopularMovies = await response.json();
-        let counter = 0;
         fetchedPopularMovies.results.forEach((currentTrendingMovie) => {
-            if (counter === 12) {
-                return;
+            if (this.getNumberOfDisplayedMovies() === MAX_PAGE_VALUE) {
+                this.UiDisplay.unlockScrollBar();
             }
             counter ++;
+            this.setNumberOfDisplayedMovies(counter);
             const posterPath = currentTrendingMovie.poster_path;
             const baseUrl = "https://image.tmdb.org/t/p/w500"; // You can change 'w500' to other sizes as needed
             const fullPosterUrl = `${baseUrl}${posterPath}`;
@@ -51,18 +61,20 @@ class MovieApp {
 
 
     async getPopularMovies() {
+        let counter = 0;
+        this.setNumberOfDisplayedMovies(counter);
         this.setCurrentSetSearchSetting(TRENDING_OPTION);
         this.UiDisplay.setDisplayedMoviesHeaderTitle(this.getCurrentSetSearchSetting())
         const displayedMovieDiv = document.getElementById('displayedMoviesDiv');
         displayedMovieDiv.innerHTML = '';
         const response = await fetch(this.POPULAR_MOVIES_API_LINK, {mode: "cors"});
         const fetchedPopularMovies = await response.json();
-        let counter = 0;
         fetchedPopularMovies.results.forEach((currentPopularMovie) => {
-            if (counter === 12) {
-                return;
+            if (this.getNumberOfDisplayedMovies() === MAX_PAGE_VALUE) {
+                this.UiDisplay.unlockScrollBar();
             }
             counter ++;
+            this.setNumberOfDisplayedMovies(counter);
             const posterPath = currentPopularMovie.poster_path;
             const baseUrl = "https://image.tmdb.org/t/p/w500"; // You can change 'w500' to other sizes as needed
             const fullPosterUrl = `${baseUrl}${posterPath}`;
