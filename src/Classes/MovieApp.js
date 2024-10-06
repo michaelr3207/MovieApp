@@ -11,7 +11,7 @@ class MovieApp {
         this.API_LINK = process.env.OMDB_API_KEY;
         this.POPULAR_MOVIES_API_LINK = process.env.TMDB_POPULAR_KEY;
         this.TRENDING_MOVIES_API_LINK = process.env.TMDB_TRENDING_KEY;
-        this.UiDisplay = new UIDisplay('Movie App Display');
+        this.UiDisplay = new UIDisplay('Movie App Display', this);
         this.movieToBeSearched = 'Riders of Justice';
         this.enteredUrl = this.getApiLink() + translateMovieTitleToBeSearched(this.movieToBeSearched);
         this.currentSelectedMovie = null;
@@ -20,6 +20,8 @@ class MovieApp {
         this.getMovieDataAndUpdateUi().then(r => console.log('Fetching Data complete'));
         this.getPopularMovies().then(r => console.log('Successfully fetched popular movies.'));
     }
+
+
 
     getCurrentSetSearchSetting() {
         return this.currentSetSearchSetting;
@@ -42,8 +44,6 @@ class MovieApp {
         this.setNumberOfDisplayedMovies(counter);
         this.setCurrentSetSearchSetting(TRENDING_OPTION);
         this.UiDisplay.setDisplayedMoviesHeaderTitle(this.getCurrentSetSearchSetting());
-        const displayedMovieDiv = document.getElementById('displayedMoviesDiv');
-        displayedMovieDiv.innerHTML = '';
         const response = await fetch(this.TRENDING_MOVIES_API_LINK, {mode: "cors"});
         const fetchedPopularMovies = await response.json();
         fetchedPopularMovies.results.forEach((currentTrendingMovie) => {
@@ -52,10 +52,7 @@ class MovieApp {
             }
             counter ++;
             this.setNumberOfDisplayedMovies(counter);
-            const posterPath = currentTrendingMovie.poster_path;
-            const baseUrl = "https://image.tmdb.org/t/p/w500"; // You can change 'w500' to other sizes as needed
-            const fullPosterUrl = `${baseUrl}${posterPath}`;
-            displayedMovieDiv.appendChild(this.UiDisplay.buildDisplayedMovieComponent(currentTrendingMovie.original_title, fullPosterUrl));
+            this.UiDisplay.addMovieComponent(currentTrendingMovie);
         });
     }
 
@@ -65,8 +62,6 @@ class MovieApp {
         this.setNumberOfDisplayedMovies(counter);
         this.setCurrentSetSearchSetting(POPULAR_OPTION);
         this.UiDisplay.setDisplayedMoviesHeaderTitle(this.getCurrentSetSearchSetting())
-        const displayedMovieDiv = document.getElementById('displayedMoviesDiv');
-        displayedMovieDiv.innerHTML = '';
         const response = await fetch(this.POPULAR_MOVIES_API_LINK, {mode: "cors"});
         const fetchedPopularMovies = await response.json();
         fetchedPopularMovies.results.forEach((currentPopularMovie) => {
@@ -75,16 +70,17 @@ class MovieApp {
             }
             counter ++;
             this.setNumberOfDisplayedMovies(counter);
-            const posterPath = currentPopularMovie.poster_path;
-            const baseUrl = "https://image.tmdb.org/t/p/w500"; // You can change 'w500' to other sizes as needed
-            const fullPosterUrl = `${baseUrl}${posterPath}`;
-            displayedMovieDiv.appendChild(this.UiDisplay.buildDisplayedMovieComponent(currentPopularMovie.original_title, fullPosterUrl));
+            this.UiDisplay.addMovieComponent(currentPopularMovie);
         });
     }
 
     async getMovieDataAndUpdateUi() {
         const response = await fetch(this.enteredUrl, {mode: "cors"});
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const fetchedMovieData = await response.json();
+        console.log(fetchedMovieData);
         this.setCurrentSelectedMovie(new Movie(fetchedMovieData.Title,fetchedMovieData.imdbRating, fetchedMovieData.Actors, fetchedMovieData.Genre, fetchedMovieData.Poster, fetchedMovieData.Plot, fetchedMovieData.Rated, fetchedMovieData.Runtime, fetchedMovieData.Released.slice(-4), fetchedMovieData));
         this.UiDisplay.updateMovieDetailsOnUi(this.getCurrentSelectedMovie());
     }

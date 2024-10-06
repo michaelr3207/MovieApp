@@ -5,6 +5,7 @@ import {POPULAR_OPTION, translateMovieTitleToBeSearched, TRENDING_OPTION} from "
 const movieApp = new MovieApp('Simple Movie App');
 
 function main() {
+    movieApp.UiDisplay.setUiImages();
      addEventListenerToSearchButtons(movieApp);
      addEventListenToCloseButtonAndIcon();
      addEventListenerToSearchButtonOnMovieDisplay();
@@ -45,14 +46,6 @@ function addEventListenerToSearchButtonOnMovieDisplay() {
     });
 }
 
-function addEventListenerToDisplayedMovie(displayedMovie) {
-    displayedMovie.addEventListener("click", () => {
-        movieApp.setMovieToBeSearched(displayedMovie.id);
-        movieApp.setEnteredUrl();
-        movieApp.getMovieDataAndUpdateUi().then(r => console.log('Fetching complete! You clicked: ' + mouseEvent.target.id));
-        movieApp.UiDisplay.hideMainScreenAndShowMovieInfoScreen();
-    });
-}
 
 function addEventListenToCloseButtonAndIcon() {
     const closeBtn = document.getElementById('closeBtn');
@@ -67,4 +60,3 @@ function addEventListenToCloseButtonAndIcon() {
 
 main();
 
-export {addEventListenerToDisplayedMovie};

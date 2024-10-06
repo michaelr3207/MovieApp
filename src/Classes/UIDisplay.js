@@ -1,12 +1,12 @@
 import Star from '../Images/3cb5d19f756bc95af4354a32797c7149.jpg'
 import Logo from  '../Images/blue_square_1-5bdc75aaebeb75dc7ae79426ddd9be3b2be1e342510f8202baf6bffa71d7f5c4.svg'
-import {addEventListenerToDisplayedMovie} from "../index";
+import {MovieApp} from "./MovieApp";
 
 class UIDisplay {
 
-    constructor(name) {
+    constructor(name, movieApp) {
         this.name = name;
-        this.setUiImages();
+        this.movieApp = movieApp;
     }
 
     setUiImages() {
@@ -44,18 +44,38 @@ class UIDisplay {
         }
     }
 
-    setDisplayedMoviesHeaderTitle(currentSelectedGenre) {
-        document.getElementById('container2TitleDiv').innerHTML = currentSelectedGenre;
+    addMovieComponent(currentMovie) {
+        const displayedMovieDiv = document.getElementById('displayedMoviesDiv');
+        const posterPath = currentMovie.poster_path;
+        const baseUrl = "https://image.tmdb.org/t/p/w500"; // You can change 'w500' to other sizes as needed
+        const fullPosterUrl = `${baseUrl}${posterPath}`;
+        displayedMovieDiv.appendChild(this.buildDisplayedMovieComponent(currentMovie.original_title, fullPosterUrl, this.movieApp));
     }
 
-    buildDisplayedMovieComponent(movieTitle, moviePoster) {
+    setDisplayedMoviesHeaderTitle(currentSelectedGenre) {
+        document.getElementById('container2TitleDiv').innerHTML = currentSelectedGenre;
+        const displayedMovieDiv = document.getElementById('displayedMoviesDiv');
+        displayedMovieDiv.innerHTML = '';
+    }
+
+    addEventListenerToDisplayedMovie(displayedMovie, movieApp) {
+        displayedMovie.addEventListener("click", () => {
+            movieApp.setMovieToBeSearched(displayedMovie.id);
+            movieApp.setEnteredUrl();
+            movieApp.getMovieDataAndUpdateUi().then(r => console.log('Fetching complete! You clicked: ' + mouseEvent.target.id));
+            movieApp.UiDisplay.hideMainScreenAndShowMovieInfoScreen();
+        });
+    }
+
+
+    buildDisplayedMovieComponent(movieTitle, moviePoster, movieApp) {
         const displayedMovieDiv = document.createElement('div');
         displayedMovieDiv.className = 'displayedMovie';
         displayedMovieDiv.id = movieTitle.toString();
         const moviePosterImage = new Image();
         moviePosterImage.src = moviePoster;
         displayedMovieDiv.appendChild(moviePosterImage);
-        addEventListenerToDisplayedMovie(displayedMovieDiv);
+        this.addEventListenerToDisplayedMovie(displayedMovieDiv, movieApp);
 
         return displayedMovieDiv;
     }
